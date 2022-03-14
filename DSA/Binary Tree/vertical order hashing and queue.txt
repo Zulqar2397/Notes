@@ -1,3 +1,5 @@
+https://www.geeksforgeeks.org/print-binary-tree-vertical-order-set-2/
+
 use a tree map to store horizontal height (HD) and list of elements with that hd
 use level order traversal and queue
 create a queue object to add horizontal distance along with node

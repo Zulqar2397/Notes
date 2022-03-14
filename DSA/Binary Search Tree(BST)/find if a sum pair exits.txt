@@ -1,8 +1,11 @@
+https://www.geeksforgeeks.org/find-a-pair-with-given-sum-in-bst/
+
 . use a hash set to store elements
-.for every value encountered check if sum-value is present in the set
+.for every value encountered check if (sum - value) is present in the set
 .if yes then return true if no the add the value in set
 .go left do same
 .go right do same
+
 // JAVA program to find a pair with
 // given sum using hashing
 

@@ -1,4 +1,6 @@
- 
+https://www.geeksforgeeks.org/binary-search-tree-set-2-delete/
+
+
 When we delete a node, three possibilities arise. 
 1) Node to be deleted is the leaf: Simply remove from the tree. 
 

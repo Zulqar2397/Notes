@@ -1,3 +1,6 @@
+use a prev pointer
+
+
 import java.util.*;
 import java.io.*;
 

@@ -1,4 +1,4 @@
- 
+https://www.geeksforgeeks.org/delete-nodes-which-have-a-greater-value-on-right-side/ 
 
 Initialize a variable maximum with head node.
 Traverse the list.
@@ -96,4 +96,4 @@ public static void main(String args[])
 }
 }
 
-// This code is contributed by Arnab Kundu
+

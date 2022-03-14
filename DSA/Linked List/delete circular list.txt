@@ -1,3 +1,5 @@
+https://www.geeksforgeeks.org/deletion-circular-linked-list/
+
 // Java program to delete a given key from
 // linked list.
 
@@ -6,7 +8,7 @@ Case 2:List is not empty
 If the list is not empty then we define two pointers curr and prev and 
 initialize the pointer curr with the head node.
 Traverse the list using curr to find the node to be deleted and
- before moving to curr to the next node, every time set prev = curr.
+before moving to curr to the next node, every time set prev = curr.
 If the node is found, check if it is the only node in the list. If yes, set head = NULL and free(curr).
 If the list has more than one node, check if it is the first node of the list. 
 Condition to check this( curr == head).

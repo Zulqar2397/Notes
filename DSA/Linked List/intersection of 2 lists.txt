@@ -1,4 +1,9 @@
-Method 2 (Use Hashing) 
+https://www.geeksforgeeks.org/write-a-function-to-get-the-intersection-point-of-two-linked-lists/
+
+
+TRY METHOD 3
+
+Method 1 (Use Hashing) 
 Basically, we need to find a common node of two linked lists.
  So we hash all nodes of the first list and then check the second list. 
 1) Create an empty hash set. 
@@ -48,7 +53,7 @@ class LinkedListIntersect {
 		}
 		System.out.println();
 	}
-
+/////////////////////////////////////////////////////////////////////////////////////
 	// function to find the intersection of two node
 	public static Node MegeNode(Node n1, Node n2)
 	{
@@ -66,6 +71,7 @@ class LinkedListIntersect {
 		}
 		return null;
 	}
+/////////////////////////////////////////////////////////////////////////////////////
 }
 
 
@@ -93,7 +99,7 @@ static class Node {
 	int data;
 	Node next;
 };
-
+////////////////////////////////////////////////////////////////////////////////
 // A utility function to return intersection node
 static Node intersectPoint(Node head1, Node head2)
 {
@@ -142,7 +148,7 @@ static Node intersectPoint(Node head1, Node head2)
 
 	return ptr1;
 }
-
+////////////////////////////////////////////////////////////////////////////////
 // Function to print intersection nodes
 // in a given linked list
 static void print(Node node)
@@ -248,6 +254,7 @@ class LinkedList {
 	/* function to get the intersection point of two linked
 	lists head1 and head2 where head1 has d more nodes than
 	head2 */
+////////////////////////////////////////////////////////////////////////////////
 	int _getIntesectionNode(int d, Node node1, Node node2)
 	{
 		int i;
@@ -269,7 +276,7 @@ class LinkedList {
 
 		return -1;
 	}
-
+////////////////////////////////////////////////////////////////////////////////
 	/*Takes head pointer of the linked list and
 	returns the count of nodes in the list */
 	int getCount(Node node)

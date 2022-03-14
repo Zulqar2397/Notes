@@ -1,3 +1,5 @@
+https://www.geeksforgeeks.org/function-to-check-if-a-singly-linked-list-is-palindrome/
+
 METHOD 2 (By reversing the list) 
 This method takes O(n) time and O(1) extra space. 
 1) Get the middle of the linked list. 
@@ -29,6 +31,7 @@ class LinkedList {
 
 	/* Function to check if given linked list is
 	palindrome or not */
+///////////////////////////////////////////////////////////////////////////////////////////
 	boolean isPalindrome(Node head)
 	{
 		slow_ptr = head;
@@ -79,7 +82,7 @@ class LinkedList {
 		}
 		return res;
 	}
-
+///////////////////////////////////////////////////////////////////////////////////////////
 	/* Function to reverse the linked list Note that this
 	function may change the head */
 	void reverse()

@@ -1,3 +1,6 @@
+https://www.geeksforgeeks.org/print-nodes-top-view-binary-tree/
+https://www.geeksforgeeks.org/bottom-view-binary-tree/
+
 /* 
 do level order traversal
 create a queue object to add horizontal distance along with node
@@ -69,7 +72,7 @@ class BinaryTree {
 		// to hd, or returns zero otherwise.
 		while (!q.isEmpty()) {
 			QueueObj tmpNode = q.poll();
-			if (!topViewMap.containsKey(tmpNode.hd)) {   //REMOVE THIS CONDITION FOR BOTTOM VIEW
+			if (!topViewMap.containsKey(tmpNode.hd)) {     //remove for bottom view coz it will override
 				topViewMap.put(tmpNode.hd, tmpNode.node);
 			}
 
@@ -112,4 +115,52 @@ class BinaryTree {
 			"Following are nodes in top view of Binary Tree");
 		tree.TopView(tree.root);
 	}
+}
+
+///bottom
+
+Preorder
+Create a map like, map where key is the horizontal distance and value is a pair(a, b) 
+where a is the value of the node and b is the height of the node. Perform a pre-order traversal of the tree. 
+If the current node at a horizontal distance of h is the first we’ve seen, insert it in the map.
+ Otherwise, compare the node with the existing one in map and if the height of the new node is greater, update in the Map.
+
+///////////////
+static void printBottomViewUtil(Node root, int curr, int hd,
+                                TreeMap<Integer, int[]> m)
+{
+     
+    // Base case
+    if (root == null)
+        return;
+ 
+    // If node for a particular
+    // horizontal distance is not
+    // present, add to the map.
+    if (!m.containsKey(hd))
+    {
+        m.put(hd, new int[]{ root.data, curr });
+    }
+     
+    // Compare height for already
+    // present node at similar horizontal
+    // distance
+    else
+    {
+        int[] p = m.get(hd);
+        if (p[1] <= curr)
+        {
+            p[1] = curr;
+            p[0] = root.data;
+        }
+        m.put(hd, p);
+    }
+ 
+    // Recur for left subtree
+    printBottomViewUtil(root.left, curr + 1,
+                        hd - 1, m);
+ 
+    // Recur for right subtree
+    printBottomViewUtil(root.right, curr + 1,
+                        hd + 1, m);
 }

@@ -1,3 +1,5 @@
+https://www.geeksforgeeks.org/count-triplets-sorted-doubly-linked-list-whose-sum-equal-given-value-x/
+
 Method 2 (Hashing): 
 Create a hash table with (key, value) tuples represented as (node data, node pointer) tuples. 
 Traverse the doubly linked list and store each node’s data and its pointer pair(tuple) in the hash table.

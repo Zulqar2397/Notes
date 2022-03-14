@@ -1,3 +1,9 @@
+https://www.geeksforgeeks.org/print-left-view-binary-tree/
+
+Method-1 (Using Recursion)
+The left view contains all nodes that are first nodes in their levels. 
+A simple solution is to do level order traversal and print the first node in every level.
+
 void printLeftViewUtil(Node root, Arraylist list,int level){
 if(root==null){return ;}
 if(list.get(level)==null){  //REMOVE THIS CONDITION FOR RIGHT VIEW OR
@@ -21,7 +27,9 @@ print(curr.data+ "");
 
 Method-2 (Using Queue):
 
-In this method, level order traversal based solution is discussed. If we observe carefully, we will see that our main task is to print the left most node of every level. So, we will do a level order traversal on the tree and print the leftmost node at every level. Below is the implementation of above approach:
+In this method, level order traversal based solution is discussed.
+If we observe carefully, we will see that our main task is to print the left most node of every level.
+So, we will do a level order traversal on the tree and print the leftmost node at every level. Below is the implementation of above approach:
 
 
 // Java program to print left view of Binary
@@ -61,7 +69,7 @@ public class PrintRightView {
  
                 // Print the left most element at
                 // the level
-                if (i == 1)
+                if (i == 1)     //f (i == n - 1) for right
                     System.out.print(temp.data + " ");
  
                 // Add left node to queue
@@ -93,3 +101,92 @@ public class PrintRightView {
     }
 }
  
+
+
+
+//RIGHT
+
+// JAVA program to print right view of
+// Binary Tree
+
+import java.io.*;
+import java.util.LinkedList;
+import java.util.Queue;
+
+// A Binary Tree Node
+class Node {
+	int data;
+	Node left, right;
+	public Node(int d)
+	{
+		data = d;
+		left = right = null;
+	}
+}
+
+class BinaryTree {
+	Node root;
+
+	// function to print Right view of
+	// binary tree
+	void rightView(Node root)
+	{
+		if (root == null) {
+			return;
+		}
+
+		Queue<Node> q = new LinkedList<>();
+		q.add(root);
+
+		while (!q.isEmpty()) {
+
+			// get number of nodes for each level
+			int n = q.size();
+
+			// traverse all the nodes of the current level
+			for (int i = 0; i < n; i++) {
+				Node curr = q.peek();
+				q.remove();
+
+				// print the last node of each level
+				if (i == n - 1) {
+					System.out.print(curr.data);
+					System.out.print(" ");
+				}
+
+				// if left child is not null add it into
+				// the
+				// queue
+				if (curr.left != null) {
+					q.add(curr.left);
+				}
+
+				// if right child is not null add it into
+				// the
+				// queue
+				if (curr.right != null) {
+					q.add(curr.right);
+				}
+			}
+		}
+	}
+
+	// Driver code
+	public static void main(String[] args)
+	{
+
+		// Let's construct the tree as
+		// shown in example
+		BinaryTree tree = new BinaryTree();
+		tree.root = new Node(1);
+		tree.root.left = new Node(2);
+		tree.root.right = new Node(3);
+		tree.root.left.left = new Node(4);
+		tree.root.left.right = new Node(5);
+		tree.root.right.left = new Node(6);
+		tree.root.right.right = new Node(7);
+		tree.root.right.left.right = new Node(8);
+
+		tree.rightView(tree.root);
+	}
+}

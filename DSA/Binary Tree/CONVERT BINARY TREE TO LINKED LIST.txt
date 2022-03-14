@@ -1,6 +1,17 @@
+https://www.geeksforgeeks.org/convert-given-binary-tree-doubly-linked-list-set-3/
+
+The idea is to do in order traversal of the binary tree.
+While doing inorder traversal, keep track of the previously visited node in a variable, say prev. 
+For every visited node, make it next to the prev and previous of this node as prev.
+maintain a prev pointer
+
 Node prev=null,head=null;
 void convertToDLL(Node root){
 if(root== null){return};
+
+
+///inorder traversal
+
 convertToDLL(root.left); //left recursive call
 
 if(prev == null) {head= root}; //setting the root with leftmost element
