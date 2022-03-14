@@ -1,0 +1,151 @@
+The idea is to store additional information for every node: 
+ 
+
+Depth of left subtree.
+Depth of right subtree.
+The time required for the fire to reach the current node starting from the first leaf node burned.
+A boolean variable to check if the initial burnt node is in the tree rooted under current node.
+Before moving ahead with the approach let’s take a look at the tree below: 
+ 
+
+              1
+          /      \          
+       2            3
+     /   \         /
+    4     5       6 
+   /     / \
+  8     9   10
+       /
+      11
+In the above tree, if we set the leaf node 11 at fire. 
+ 
+
+In 1s, the fire will reach node 9.
+In 2s, the fire will reach node 5.
+In 3rd second, the fire will reach node 2 and 10. Here comes an observation: 
+In 2s fire reached node 5. For node 5, the initial burned leaf is in it’s left subtree, so the time taken to burn right subtree will be the height of the right subtree which is 1. Therefore, fire reaches to node 10 in (2+1) = 3s.
+Again, for the node 2. Fire reached to node 2 in 3s from right subtree. Therefore, time taken to burn left subtree will be it’s height. 
+ 
+So the solution is to apply recursion and for every node calculate the below-required values: 
+ 
+
+Left Depth.
+Right Depth.
+The time required for fire to reach the current node.
+Is the current subtree contains initial burnt leaf node.
+So, for the minimum time required to burn any subtree will be: 
+ 
+
+The time required for fire to reach the root node from initial burnt leaf + depth of the opposite side 
+ 
+
+Therefore, to find time required to burn the complete tree, we need to calculate the above value for every node, and take maximum of that value. 
+ 
+
+ans = max(ans, (time required for fire to reach current node + depth of other subtree)) 
+ 
+
+
+
+
+/*
+        ***********ADDITIONAL INFO*************
+        lDepth - maximum height of left subtree
+        rDepth - maximum height of right subtree
+        contains - stores true if tree rooted at current node
+                contains the first burnt node
+        time - time to reach fire from the initially burnt leaf
+            node to this node
+    */
+    static class Data {
+        int leftDepth, rightDepth, time;
+        boolean contains;
+ 
+        Data()
+        {
+            contains = false;
+            leftDepth = rightDepth = 0;
+            time = -1;
+        }
+    }
+ 
+    /*
+        Function to calculate time required to burn
+        tree completely
+         
+        node - address of current node
+        info - extra information about current node
+        target - node that is fired
+        res - stores the result
+    */
+
+
+  public static void getResult(Node node, Data data, int target)
+    {
+ 
+        // Base case: if root is null
+        if (node == null) {
+            return;
+        }
+ 
+        // If current node is leaf
+        if (node.left == null && node.right == null) {
+ 
+            // If current node is the first burnt node
+            if (node.data == target) {
+                data.contains = true;
+                data.time = 0;
+            }
+            return;
+        }
+ 
+        // Information about left child
+        Data leftData = new Data();
+        getResult(node.left, leftData, target);
+ 
+        // Information about right child
+        Data rightData = new Data();
+        getResult(node.right, rightData, target);
+ 
+        // If left subtree contains the fired node then
+        // time required to reach fire to current node
+        // will be (1 + time required for left child)
+        data.time = (leftData.contains) ? (leftData.time + 1) : -1;
+ 
+        // If right subtree contains the fired node then
+        // time required to reach fire to current node
+        // will be (1 + time required for right child)
+        if (data.time == -1)
+            data.time = (rightData.contains) ? (rightData.time + 1) : -1;
+ 
+        // Storing(true or false) if the tree rooted at
+        // current node contains the fired node
+        data.contains = (leftData.contains || rightData.contains);
+ 
+        // Calculate the maximum depth of left subtree
+        data.leftDepth = (node.left == null) ? 0 : (1 + Math.max(leftData.leftDepth, leftData.rightDepth));
+ 
+        // Calculate the maximum depth of right subtree
+        data.rightDepth = (node.right == null) ? 0 : (1 + Math.max(rightData.leftDepth, rightData.rightDepth));
+ 
+        // Calculating answer
+        if (data.contains) {
+ 
+            // If left subtree exists and
+            // it contains the fired node
+            if (leftData.contains) {
+ 
+                // calculate result
+                res = Math.max(res, data.time + data.rightDepth);
+            }
+ 
+            // If right subtree exists and it
+            // contains the fired node
+            if (rightData.contains) {
+ 
+                // calculate result
+                res = Math.max(res, data.time + data.leftDepth);
+            }
+        }
+    }
+ 

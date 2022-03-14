@@ -1,0 +1,15 @@
+Node prev=null,head=null;
+void convertToDLL(Node root){
+if(root== null){return};
+convertToDLL(root.left); //left recursive call
+
+if(prev == null) {head= root}; //setting the root with leftmost element
+else{
+root.left =prev;
+			//Creating links btwn prev and curr root element
+prev.right =root;
+}
+prev = root; //updating the prev pointer
+
+convertToDLL(root.right); //right recursive call
+}

@@ -1,0 +1,81 @@
+https://www.geeksforgeeks.org/find-a-triplet-that-sum-to-a-given-value/
+
+Method 2: This method uses sorting to increase the efficiency of the code. 
+
+Approach: By Sorting the array the efficiency of the algorithm can be improved. 
+This efficient approach uses the two-pointer technique.
+Traverse the array and fix the first element of the triplet.
+Now use the Two Pointers algorithm to find if there is a pair whose sum is equal to x – array[i].
+Two pointers algorithm take linear time so it is better than a nested loop.
+
+/////////////////////////////
+
+Algorithm : 
+Sort the given array.
+Loop over the array and fix the first element of the possible triplet, arr[i].
+Then fix two pointers, one at i + 1 and the other at n – 1. And look at the sum, 
+If the sum is smaller than the required sum, increment the first pointer.
+Else, If the sum is bigger, Decrease the end pointer to reduce the sum.
+Else, if the sum of elements at two-pointer is equal to given sum then print the triplet and break.
+
+///////////////////////////////
+
+// Java program to find triplets in a given
+// array whose sum is zero
+import java.util.Arrays;
+import java.io.*;
+
+class GFG {
+	// function to print triplets with 0 sum
+static void findTriplets(int arr[], int n)
+{
+	boolean found = false;
+
+	// sort array elements
+	Arrays.sort(arr);
+
+	for (int i=0; i<n-1; i++)
+	{
+		// initialize left and right
+		int l = i + 1;
+		int r = n - 1;
+		int x = arr[i];
+		while (l < r)
+		{
+			if (x + arr[l] + arr[r] == 0)
+			{
+				// print elements if it's sum is zero
+					System.out.print(x + " ");
+					System.out.print(arr[l]+ " ");
+					System.out.println(arr[r]+ " ");
+	
+				l++;
+				r--;
+				found = true;
+			}
+
+			// If sum of three elements is less
+			// than zero then increment in left
+			else if (x + arr[l] + arr[r] < 0)
+				l++;
+
+			// if sum is greater than zero than
+			// decrement in right side
+			else
+				r--;
+		}
+	}
+
+	if (found == false)
+			System.out.println(" No Triplet Found");
+}
+
+// Driven source
+	public static void main (String[] args) {
+
+	int arr[] = {0, -1, 2, -3, 1};
+	int n =arr.length;
+	findTriplets(arr, n);
+	}
+
+}

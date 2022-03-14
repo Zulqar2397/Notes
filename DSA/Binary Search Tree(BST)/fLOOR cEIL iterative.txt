@@ -1,0 +1,110 @@
+Iterative Approach –
+
+1. If tree is empty, i.e. root is null, 
+   return back to calling function.
+2. If current node address is not null, perform the following steps : 
+     (a) If current node data matches with the key value - 
+             We have found both our floor and ceil value. 
+             Hence, we return back to calling function.
+    (b) If data in current node is lesser than the key value - 
+            We assign the current node data to the variable keeping
+            track of current floor value and explore the right subtree,
+            as it may contain nodes with values greater than key value.
+    (c) If data in current node is greater than the key value - 
+            We assign the current node data to the variable keeping track
+            of current ceil value and explore the left subtree, as it may
+            contain nodes with values lesser than key value.
+3. Once we reach null, we return back to the calling function,
+   as we have got our required floor and ceil values for the particular key value.
+
+// Java program to find floor and ceil
+// of a given key in BST
+import java.io.*;
+
+// A binary tree node has key,
+// left child and right child
+class Node
+{
+	int data;
+	Node left, right;
+
+	Node(int d)
+	{
+		data = d;
+		left = right = null;
+	}
+}
+
+class BinaryTree{
+	
+Node root;
+int floor;
+int ceil;
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// Helper function to find floor and
+// ceil of a given key in BST
+public void floorCeilBSTHelper(Node root,
+							int key)
+{
+	while (root != null)
+	{
+		if (root.data == key)
+		{
+			ceil = root.data;
+			floor = root.data;
+			return;
+		}
+
+		if (key > root.data)   //mtlb right me hai floor coz floor is greatest value less than key
+		{
+			floor = root.data;
+			root = root.right;
+		}
+		else
+		{
+			ceil = root.data;  //mtlb left me hai ceil coz ceil is least value greater than key
+			root = root.left;
+		}
+	}
+	return;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////            
+// Display the floor and ceil of a
+// given key in BST. If key is less
+// than the min key in BST, floor
+// will be -1; If key is more than
+// the max key in BST, ceil will be -1;
+public void floorCeilBST(Node root, int key)
+{
+	
+	// Variables 'floor' and 'ceil'
+	// are passed by reference
+	floor = -1;
+	ceil = -1;
+
+	floorCeilBSTHelper(root, key);
+
+	System.out.println(key + " " +
+					floor + " " + ceil);
+}
+
+// Driver code
+public static void main(String[] args)
+{
+	BinaryTree tree = new BinaryTree();
+	tree.root = new Node(8);
+	tree.root.left = new Node(4);
+	tree.root.right = new Node(12);
+	tree.root.left.left = new Node(2);
+	tree.root.left.right = new Node(6);
+	tree.root.right.left = new Node(10);
+	tree.root.right.right = new Node(14);
+	
+	for(int i = 0; i < 16; i++)
+	{
+		tree.floorCeilBST(tree.root, i);
+	}
+}
+}
+
+// This code is contributed by RohitOberoi

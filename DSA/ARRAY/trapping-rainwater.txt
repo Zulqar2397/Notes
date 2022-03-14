@@ -1,0 +1,125 @@
+https://www.geeksforgeeks.org/trapping-rain-water/
+
+Basic Insight: 
+An element of the array can store water if there are higher bars on the left and right.
+ The amount of water to be stored in every element can be found out by finding the heights of bars on the left and right sides.
+ The idea is to compute the amount of water that can be stored in every element of the array. 
+
+
+
+// Java program to find maximum amount of water that can
+// be trapped within given set of bars.
+
+class Test {
+	static int arr[] = new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 };
+
+	// Method for maximum amount of water
+	static int findWater(int n)
+	{
+		// left[i] contains height of tallest bar to the
+		// left of i'th bar including itself
+		int left[] = new int[n];
+
+		// Right [i] contains height of tallest bar to
+		// the right of ith bar including itself
+		int right[] = new int[n];
+
+		// Initialize result
+		int water = 0;
+
+		// Fill left array
+		left[0] = arr[0];
+		for (int i = 1; i < n; i++)
+			left[i] = Math.max(left[i - 1], arr[i]);
+
+		// Fill right array
+		right[n - 1] = arr[n - 1];
+		for (int i = n - 2; i >= 0; i--)
+			right[i] = Math.max(right[i + 1], arr[i]);
+
+		// Calculate the accumulated water element by element
+		// consider the amount of water on i'th bar, the
+		// amount of water accumulated on this particular
+		// bar will be equal to min(left[i], right[i]) - arr[i] .
+		for (int i = 0; i < n; i++)
+			water += Math.min(left[i], right[i]) - arr[i];
+
+		return water;
+	}
+
+	// Driver method to test the above function
+	public static void main(String[] args)
+	{
+
+		System.out.println("Maximum water that can be accumulated is " + findWater(arr.length));
+	}
+}
+
+
+///space complexity optimisation
+
+// JAVA Code For Trapping Rain Water
+import java.util.*;
+
+2 pointers to travers
+2 pointers to keep max ht of left nd right
+chose the small from left nd right
+if left compare with left_max and
+if left<left_max update left_max else res+=left_max-left
+if right compare with right_max and
+if right<right_max update right_max else res+=right_max-right
+
+
+class GFG {
+
+	static int findWater(int height[], int n)
+	{
+		// initialize output
+		int trappedwater= 0;
+
+		// maximum element on left and right
+		int left_max = height[0], right_max = height[n-1];
+
+		// indices to traverse the array
+		int lo = 1, hi = n - 2;
+
+		while (lo <= hi) {
+			if (left_max < right_max) {
+				if (height[lo] > left_max)
+
+					// update max in left
+					left_max = height[lo];
+				else
+
+					// water on curr element =
+					// max - curr
+					result += left_max - height[lo];
+				lo++;
+			}
+			else {
+				if (height[hi] > right_max)
+
+					// update right maximum
+					right_max = height[hi];
+
+				else
+					result += right_max - height[hi];
+				hi--;
+			}
+		}
+
+		return trappedwater;
+	}
+
+	/* Driver program to test above function */
+	public static void main(String[] args)
+	{
+		int arr[] = { 0, 1, 0, 2, 1, 0, 1,
+					3, 2, 1, 2, 1 };
+		int n = arr.length;
+
+		System.out.println("Maximum water that "
+						+ "can be accumulated is "
+						+ findWater(arr, n));
+	}
+}

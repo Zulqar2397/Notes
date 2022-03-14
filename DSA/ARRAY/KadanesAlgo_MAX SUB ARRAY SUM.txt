@@ -1,0 +1,66 @@
+https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/
+
+The simple idea of Kadane’s algorithm is to look for all positive contiguous segments of the array 
+(segment_max is used for this) to give max of segment
+. And keep track of maximum sum contiguous segment among all positive segments 
+(max is used for this).  //total max
+Each time we get a positive-sum compare it with max and update max if it is greater than max 
+whenever we face negative we ignore the whole left side and set sum to 0
+
+Kadane’s Algorithm:
+
+Initialize:
+    max = INT_MIN
+    segment_max = 0
+
+Loop for each element of the array
+  (a) segment_max = segment_max + a[i]
+  (b) if(max < segment_max)
+            max = segment_max
+  (c) if(segment_max < 0)
+            segment_max = 0
+return max
+
+
+// Java program to print largest
+// contiguous array sum
+class GFG {
+
+	static void maxSubArraySum(int a[], int size)
+	{
+		int max_sum = 0,
+		current_sum = 0,start = 0,
+		end = 0, s = 0;
+
+		for (int i = 0; i < size; i++)
+		{
+			current_sum += a[i];
+
+			if (max_sum < current_sum)
+			{
+				max_sum = current_sum;
+				start = s;
+				end = i;
+			}
+
+			if (current_sum < 0)
+			{
+				current_sum = 0;
+				s = i + 1;
+			}
+		}
+		System.out.println("Maximum contiguous sum is "
+						+ max_sum);
+		System.out.println("Starting index " + start);
+		System.out.println("Ending index " + end);
+	}
+
+	// Driver code
+	public static void main(String[] args)
+	{
+		int a[] = { -2, -3, 4, -1, -2, 1, 5, -3 };
+		int n = a.length;
+		maxSubArraySum(a, n);
+	}
+}
+

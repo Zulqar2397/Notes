@@ -1,0 +1,6 @@
+
+1.reverse list k blocks
+2.remove string pattern
+3.add first nd 2nd half
+4.Inversion count using merge sort
+5.Flatten The Multi-Level Linked List

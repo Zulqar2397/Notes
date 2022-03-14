@@ -1,0 +1,94 @@
+//just the height 
+
+int height(Node root){
+if(root==null)
+return 0;
+
+return (Math.max(height(root.left),height(root.right))+1);
+}
+
+
+//with path
+The idea here is that we will recursively get the possible maximum path sum from root to leaf,
+ we will store this in a variable say maxSum, then, find the path with a sum equivalent to maxSum.
+
+ 
+
+So the steps will be as given below:
+
+Recursively call to get the maximum path sum for left and right subtree
+Return maximum sum to be the current node’s data + max(left maximum path sum, right maximum path sum)
+After getting the maximum path sum, find the path with a sum equivalent to the max path sum using recursion
+/*
+    Time commplexity: O(N)
+    Space complexity: O(H)
+
+    Where 'N' is the number of nodes,
+    and 'H' is the height of given tree.
+*/
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+    public static int getSum(BinaryTreeNode <Integer> root) {
+
+        int sum = Integer.MIN_VALUE;
+
+        if (root.left != null) {
+            sum = Math.max(sum, getSum(root.left));
+        }
+
+        if (root.right != null) {
+            sum = Math.max(sum, getSum(root.right));
+        }
+
+        if (sum == Integer.MIN_VALUE) {
+            sum = 0;
+        }
+
+        return sum + root.data;
+    }
+
+    public static boolean getPath(BinaryTreeNode <Integer> root, List <Integer> path, int ans, int sum) {
+
+        if (root == null) {
+            // If ans == sum, we have found the desired path, otherwise we haven't.
+            if (ans == sum) {
+                return true;
+            }
+            return false;
+        }
+
+        sum += root.data;
+        path.add(root.data);
+
+        if (getPath(root.left, path, ans, sum)) {
+            return true;
+        }
+
+        if (getPath(root.right, path, ans, sum)) {
+            return true;
+        }
+
+        path.remove(path.size() - 1);
+        sum -= root.data;
+
+        return false;
+    }
+    public static List <Integer> maxSum(BinaryTreeNode <Integer> root) {
+
+        int s = getSum(root);
+
+        List <Integer> path = new ArrayList <Integer> ();
+
+        getPath(root, path, s, 0);
+
+        for (int i = 0; i + i + 1 < path.size(); i++) {
+            Collections.swap(path, i, path.size() - i - 1);
+        }
+
+        return path;
+    }
+}

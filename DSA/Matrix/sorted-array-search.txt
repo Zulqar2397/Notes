@@ -1,0 +1,34 @@
+https://www.geeksforgeeks.org/searching-algorithms-for-a-2d-arrays-matrix/
+
+
+To apply Binary Search first the 2D array needs to be sorted in any order that itself takes (M*N)log(M*N) time.
+ So the total time complexity to search any element here is O((M * N) log(M * N)) + O(N + M) 
+which very poor when it is compared with the time complexity of Linear Search which is just O(N*M). 
+Therefore, Linear Search is used for searching in an unsorted array, not Binary Search. 
+/*************************************
+ 
+    Following is the Pair Class structure.
+    
+    class Pair{
+        int x; int y;
+        
+        Pair(int x, int y){
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+*************************************/
+
+public class Solution {
+	public static Pair search(int [][] matrix, int x) {
+		// Write your code here.
+        int row=0,col=matrix.length-1;
+        while(row<matrix.length && col>=0){
+            if(matrix[row][col]==x){ return new Pair(row,col);}
+            if(x<matrix[row][col]){ col--;}
+            else{ row++;}
+        }
+        return new Pair(-1,-1);
+	}
+}

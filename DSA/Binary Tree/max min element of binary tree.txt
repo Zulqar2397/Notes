@@ -1,0 +1,6 @@
+int maximun(Node root){
+if(root==null)
+return -9999;
+
+return Math.max( root.data , Math.max( maximum(root.left),maximum(root.right) );
+}

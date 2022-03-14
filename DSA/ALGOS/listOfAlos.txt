@@ -1,0 +1,7 @@
+1.DNF
+2.Sliding Window
+3.Hashing/hashmap
+4.Moores
+5.2 pointer
+6.Kadanes
+7.floyds loop detection algo

@@ -1,0 +1,60 @@
+https://www.geeksforgeeks.org/given-an-array-a-and-a-number-x-check-for-pair-in-a-with-sum-as-x/
+//////////////////////////////////////////////////////////////////
+
+Method 2: Hashing.
+
+Approach: This problem can be solved efficiently by using the technique of hashing. 
+Use a hash_map to check for the current array value x(let),
+if there exists a value target_sum-x which on adding to the former gives target_sum. 
+This can be done in constant time.
+
+
+Algorithm:  
+
+Initialize an empty hash table s.
+Do following for each element A[i] in A[] 
+If s[x – A[i]] is set then print the pair (A[i], x – A[i])
+Insert A[i] into s.
+
+//////////////////////////////////////////////////////////////////
+
+import java.io.*;
+import java.util.*;
+public class Solution{
+    public static int[][] pairSum(int[] arr, int s) {
+        // Write your code here.
+//         Arrays.sort(arr);
+//         int low = 0;
+//         int high = arr.length -1;
+//          int[][] res = new int[10][2];
+//         while(low<high)
+//         {
+//                     int i=0;
+
+//             if(arr[low]+arr[high]>s){
+//                 high--;
+//             }
+//             if(arr[low]+arr[high]<s){
+//                 low++;
+//         }
+//             else{
+//                 res[i][0]=arr[low];
+//                 res[i][1]=arr[high];
+//                i++;
+//             }
+//     }
+//                     return res;
+        HashSet<Integer> mySet = new HashSet<Integer>();
+            int[][] res = new int[10][2];
+            for(int i=0;i<arr.length;i++){
+                int j=0;
+                int secondNo= s - arr[i];
+                if(mySet.contains(secondNo)){
+                    res[j][0]=arr[i];
+                    res[j][1]=secondNo;
+                    j++;
+                }
+                mySet.add(arr[i]);
+            }
+return res;
+}}

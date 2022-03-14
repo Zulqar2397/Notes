@@ -1,0 +1,99 @@
+ 
+
+Initialize a variable maximum with head node.
+Traverse the list.
+Check if the next node is lesser than max_node. If yes, move to the next node.
+Else If not, then update the value of max_node and delete the next node.
+
+// Java implementation of above approach
+class Solution
+{
+
+// Structure of a linked list node
+static class Node
+{
+	int data;
+	Node next;
+};
+
+// Function to Delete nodes which have
+// greater value node(s) on right side
+static Node delNodes(Node head)
+{
+	Node current = head;
+
+	// Initialize max
+	Node maxnode = head;
+	Node temp;
+
+	while (current != null && current.next != null)
+	{
+
+		// If current is lesser than max,
+		// then update max and move current
+		if (current.next.data <= maxnode.data)
+		{
+			current = current.next;
+			maxnode = current;
+		}
+
+		// If current is greater than max, then delete current
+		else
+		{
+			temp = current.next;
+			current.next = temp.next;
+		}
+	}
+	return head;
+}
+
+
+// Utility function to insert a node at the beginning /
+static Node push(Node head_ref, int new_data)
+{
+	Node new_node = new Node();
+	new_node.data = new_data;
+	new_node.next = head_ref;
+	head_ref = new_node;
+	return head_ref;
+}
+
+// Utility function to print a linked list /
+static Node printList(Node head)
+{
+	while (head != null)
+	{
+		System.out.print( head.data + " ");
+		head = head.next;
+	}
+	System.out.println();
+	return head;
+}
+
+// Driver program to test above functions /
+public static void main(String args[])
+{
+	Node head = null;
+
+	/* Create following linked list
+	12->15->10->11->5->6->2->3 */
+	head=push(head, 3);
+	head=push(head, 2);
+	head=push(head, 6);
+	head=push(head, 5);
+	head=push(head, 11);
+	head=push(head, 10);
+	head=push(head, 15);
+	head=push(head, 12);
+
+	System.out.printf("Given Linked List \n");
+	printList(head);
+
+	head=delNodes(head);
+
+	System.out.printf("Modified Linked List \n");
+	printList(head);
+}
+}
+
+// This code is contributed by Arnab Kundu
