@@ -1,4 +1,40 @@
 https://www.geeksforgeeks.org/given-an-array-a-and-a-number-x-check-for-pair-in-a-with-sum-as-x/
+
+Method 1: Sorting and Two-Pointers technique.
+
+Approach: A tricky approach to solve this problem can be to use the two-pointer technique.
+But for using two pointer technique, the array must be sorted. 
+Once the array is sorted the two pointers can be taken which mark the beginning and end of the array respectively. 
+If the sum is greater than the sum of those two elements, shift the right pointer to decrease the value of required sum
+and if the sum is lesser than the required value, shift the left pointer to increase the value of the required sum. 
+
+
+ // Function to check if array has 2 elements
+    // whose sum is equal to the given value
+    static boolean hasArrayTwoCandidates(
+        int A[],
+        int arr_size, int sum)
+    {
+        int l, r;
+ 
+        /* Sort the elements */
+        Arrays.sort(A);
+ 
+        /* Now look for the two candidates
+        in the sorted array*/
+        l = 0;
+        r = arr_size - 1;
+        while (l < r) {
+            if (A[l] + A[r] == sum)
+                return true;
+            else if (A[l] + A[r] < sum)
+                l++;
+            else // A[i] + A[j] > sum
+                r--;
+        }
+        return false;
+    }
+
 //////////////////////////////////////////////////////////////////
 
 Method 2: Hashing.
@@ -22,39 +58,21 @@ import java.io.*;
 import java.util.*;
 public class Solution{
     public static int[][] pairSum(int[] arr, int s) {
-        // Write your code here.
-//         Arrays.sort(arr);
-//         int low = 0;
-//         int high = arr.length -1;
-//          int[][] res = new int[10][2];
-//         while(low<high)
-//         {
-//                     int i=0;
-
-//             if(arr[low]+arr[high]>s){
-//                 high--;
-//             }
-//             if(arr[low]+arr[high]<s){
-//                 low++;
-//         }
-//             else{
-//                 res[i][0]=arr[low];
-//                 res[i][1]=arr[high];
-//                i++;
-//             }
-//     }
-//                     return res;
-        HashSet<Integer> mySet = new HashSet<Integer>();
-            int[][] res = new int[10][2];
-            for(int i=0;i<arr.length;i++){
-                int j=0;
-                int secondNo= s - arr[i];
-                if(mySet.contains(secondNo)){
-                    res[j][0]=arr[i];
-                    res[j][1]=secondNo;
-                    j++;
-                }
-                mySet.add(arr[i]);
+  static void printpairs(int arr[], int sum)
+    {
+        HashSet<Integer> s = new HashSet<Integer>();
+        for (int i = 0; i < arr.length; ++i)
+        {
+            int temp = sum - arr[i];
+ 
+            // checking for condition
+            if (s.contains(temp)) {
+                System.out.println(
+                    "Pair with given sum "
+                    + sum + " is (" + arr[i]
+                    + ", " + temp + ")");
             }
-return res;
-}}
+            s.add(arr[i]);
+        }
+    }
+}
